@@ -11,7 +11,7 @@ const Data = (props) => {
           return (
             <View key={u.Id}>
               <Text style={styles.categoryName}>{u.Name}</Text>
-              <Product data={u.Product} />
+              <Product data={u} />
             </View>
           );
         })}

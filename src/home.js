@@ -29,7 +29,6 @@ class Home extends React.Component {
         PageIndex: 1,
       })
       .then((res) => {
-        console.log("response", res.data.Result);
         this.setState({
           category: res.data.Result.Category,
           activeIndexData: res.data.Result.Category[0],
@@ -53,29 +52,18 @@ class Home extends React.Component {
         console.log("err", err);
       });
     // this.setState({});
-    console.log("data in Method", data);
     this.setState({ activeIndexData: data.data.Result.Category[0] });
-    return data;
   };
 
   render() {
     const { activeIndexData } = this.state;
-    console.log("this.state.activeIndexData", this.state.activeIndexData);
     return (
       <View>
         <View style={styles.InnerContainer}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "flex-end",
-              marginTop: 10,
-              marginRight: 100,
-            }}
-          >
+          <View style={styles.container}>
             <Image
               source={FilterIcon}
-              style={[styles.icon, { marginRight: 20 }]}
+              style={[styles.icon, { marginRight: 10 }]}
             />
             <Image source={SearchIcon} style={styles.icon} />
           </View>
@@ -107,9 +95,7 @@ class Home extends React.Component {
             })}
           </ScrollView>
         </View>
-        {/* {this.state && this.state.activeIndexData && (
-          <SubCategory data={this.state.activeIndexData} />
-        )} */}
+
         <SubCategory data={this.state.activeIndexData} />
       </View>
     );
@@ -128,5 +114,12 @@ const styles = StyleSheet.create({
   icon: {
     height: 20,
     width: 20,
+  },
+  container: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    marginTop: 10,
+    marginRight: 10,
   },
 });
