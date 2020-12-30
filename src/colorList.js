@@ -22,9 +22,8 @@ const ColorList = (props) => {
             style={styles.inputBox}
             onChangeText={(text) => {
               let data = colors.filter((x) => {
-                return JSON.stringify(x.id) === text;
+                return JSON.stringify(x.id) === text; //Match the data for input
               });
-              console.log("data", data);
               data.length === 1 && setselectedColor(...data);
             }}
             keyboardType="numeric"

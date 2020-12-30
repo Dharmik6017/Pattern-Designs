@@ -60,7 +60,6 @@ class ColorPicker extends React.Component {
     return (
       <View>
         {colors.map((u, i) => {
-          console.log("u", u);
           return <ColorList data={u} key={i} />;
         })}
       </View>

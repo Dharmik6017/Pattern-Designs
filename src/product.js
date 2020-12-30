@@ -14,6 +14,8 @@ const Product = (props) => {
   const [newData, setnewData] = useState(data.Product);
   const [productData, setproductData] = useState(props.data.Product);
 
+  //get pagination data
+
   const getData = async () => {
     if (newData.length === 5) {
       await axios
@@ -24,7 +26,7 @@ const Product = (props) => {
         .then((res) => {
           setindex(index + 1);
           setnewData(res.data.Result);
-          setproductData([...productData, ...res.data.Result]);
+          setproductData([...productData, ...res.data.Result]); //adding data to existing data
         })
         .catch((err) => {
           console.log("error to get new Data ::", err);
@@ -46,6 +48,7 @@ const Product = (props) => {
           return (
             <View style={styles.cardContainer} key={u.Id}>
               <ImageBackground
+                borderRadius={10}
                 source={{ uri: u.ImageName }}
                 style={styles.image}
               >
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  image: { height: 100, width: 100, borderRadius: 10 },
+  image: { height: 100, width: 100 },
   title: { textTransform: "capitalize", marginTop: 7, color: "#626667" },
   cardContainer: {
     marginRight: 10,

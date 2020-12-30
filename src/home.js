@@ -20,6 +20,8 @@ class Home extends React.Component {
   };
 
   async componentDidMount() {
+    // Calling api for get Categories Data
+
     await axios
       .post("http://esptiles.imperoserver.in/api/API/Product/DashBoard", {
         CategoryId: 0,
@@ -39,6 +41,8 @@ class Home extends React.Component {
       });
   }
 
+  //this method for get category wise data
+
   getCategoryData = async (id, index) => {
     const data = await axios
       .post("http://esptiles.imperoserver.in/api/API/Product/DashBoard", {
@@ -51,14 +55,13 @@ class Home extends React.Component {
       .catch((err) => {
         console.log("err", err);
       });
-    // this.setState({});
-    this.setState({ activeIndexData: data.data.Result.Category[0] });
+    this.setState({ activeIndexData: data.data.Result.Category[0] }); //setting first index data to current category
   };
 
   render() {
     const { activeIndexData } = this.state;
     return (
-      <View>
+      <ScrollView>
         <View style={styles.InnerContainer}>
           <View style={styles.container}>
             <Image
@@ -73,20 +76,22 @@ class Home extends React.Component {
                 <TouchableOpacity
                   key={u.Id}
                   style={styles.innerContainerStyle}
-                  onPress={(data) => {
-                    console.log(u);
+                  onPress={() => {
                     if (u.Id !== activeIndexData.Id) {
                       this.getCategoryData(u.Id, 2);
                     }
                   }}
                 >
                   <Text
-                    style={{
-                      color:
-                        this.state.activeIndexData.Id === u.Id
-                          ? "#fff"
-                          : "#ababab",
-                    }}
+                    style={[
+                      styles.categorytitle,
+                      {
+                        color:
+                          this.state.activeIndexData.Id === u.Id
+                            ? "#fff"
+                            : "#ababab",
+                      },
+                    ]}
                   >
                     {u.Name}
                   </Text>
@@ -95,9 +100,10 @@ class Home extends React.Component {
             })}
           </ScrollView>
         </View>
+        {/* passing current category data to subcategory */}
 
         <SubCategory data={this.state.activeIndexData} />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -112,8 +118,8 @@ const styles = StyleSheet.create({
   innerContainerStyle: { padding: 10 },
   InnerContainer: { backgroundColor: "#1F1F1F" },
   icon: {
-    height: 20,
-    width: 20,
+    height: 25,
+    width: 25,
   },
   container: {
     flexDirection: "row",
@@ -121,5 +127,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginTop: 10,
     marginRight: 10,
+  },
+  categorytitle: {
+    fontSize: 20,
   },
 });

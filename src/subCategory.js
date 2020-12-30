@@ -22,6 +22,8 @@ const Data = (props) => {
 const SubCategory = (props) => {
   return (
     <View style={styles.container}>
+      {/* if there is no data in category than Dispaly No data Component */}
+
       {props.data.SubCategories ? (
         <Data data={props.data.SubCategories} />
       ) : (
